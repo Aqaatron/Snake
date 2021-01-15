@@ -35,6 +35,10 @@ namespace Snake
 
             rightLine.Draw();
 
+            Point start_pos = new Point(WIDTH - 5 , HEIGHT - 5, '*');
+            Snake snake = new Snake(start_pos, 3, Direction.RIGHT);
+
+            snake.Draw();
             Console.Read();
         }
         
