@@ -20,16 +20,23 @@ namespace Snake
 
             Point p2 = new Point(4, 5, '_');
 
+            List<int> numList = new List<int>();
+            numList.Add(0);
+            numList.Add(1);
+            numList.Add(2);
+            int x = numList[0];
 
-            p1 = p2;
+            //foreach (int i in numList)
+            //{
+            //    Console.WriteLine(i);
+            //}
 
-            p2.x++;
+            numList.RemoveAt(0);
 
-            p2.y++;
+            List<Point> pList = new List<Point>();
+            pList.Add(p1);
+            pList.Add(p2);
 
-            Console.WriteLine($"p1= {p1.x}, {p1.y}");
-
-            Console.Read();
         }
         
     }
