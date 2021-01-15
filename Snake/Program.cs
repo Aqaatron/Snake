@@ -8,35 +8,34 @@ namespace Snake
 {
     class Program
     {
+        const int WIDTH = 100;
+        const int HEIGHT = 35;
+        const char SYM = '+';
         static void Main(string[] args)
         {
-            //int x1 = 1;
-            //int y1 = 3;
-            //char sym1 = '*';
-            Point p1 = new Point(3, 1, '*');
-            //p1.x = 1;
-            //p1.y = 3;
-            //p1.sym = '*';
+            Console.SetWindowSize (WIDTH + 2, HEIGHT + 2);
 
-            Point p2 = new Point(4, 5, '_');
+            Console.SetBufferSize(WIDTH + 2, HEIGHT + 2);
 
-            List<int> numList = new List<int>();
-            numList.Add(0);
-            numList.Add(1);
-            numList.Add(2);
-            int x = numList[0];
+            HorizontalLine topLine = new HorizontalLine(1, WIDTH, 1, SYM);
 
-            //foreach (int i in numList)
-            //{
-            //    Console.WriteLine(i);
-            //}
+            HorizontalLine botLine = new HorizontalLine(1, WIDTH, HEIGHT + 1, SYM);
 
-            numList.RemoveAt(0);
+            VerticalLine leftLine = new VerticalLine(1, HEIGHT + 1, 1, SYM);
 
-            List<Point> pList = new List<Point>();
-            pList.Add(p1);
-            pList.Add(p2);
+            VerticalLine rightLine = new VerticalLine(1, HEIGHT + 1, WIDTH + 1, SYM);
 
+          
+
+            topLine.Draw();
+
+            botLine.Draw();
+
+            leftLine.Draw();
+
+            rightLine.Draw();
+
+            Console.Read();
         }
         
     }
