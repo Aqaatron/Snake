@@ -39,7 +39,7 @@ namespace Snake
 
             pList.Remove(tail);//удаляем его
 
-            Point head = GetNextPoint();//создаём новую точку для реализации движения змейки
+            Point head = GetNextPoint();//создаём новую точку для реализации движения змейки, путём перемешения первой точки
 
             pList.Add(head);//добавляем её в наш лист в самое начало
 
@@ -52,10 +52,34 @@ namespace Snake
         public Point GetNextPoint ()
         {
             Point head = pList.Last(); //Создаём переменную типа Point -  head, в которую копируем последнюю точку в списке (голову змейки).
+
             Point nextpoint = new Point(head);//Создаём точку 
+
             nextpoint.Move(1, direction);//сдвигаем координату точки на 1 единицу в выбранном направлении
+
             return nextpoint;
 
+        }
+
+        public void HandleKey(ConsoleKey key)//Обработка нажатия клавиши
+        {
+           //Проверяем какая клавиша нажата и меняем направление движения в соответствии с этой клавишей
+                if (key == ConsoleKey.LeftArrow)
+
+                    direction = Direction.LEFT;
+
+                else if (key == ConsoleKey.RightArrow)
+
+                    direction = Direction.RIGHT;
+
+                else if (key == ConsoleKey.UpArrow)
+
+                    direction = Direction.UP;
+
+                else if (key == ConsoleKey.DownArrow)
+
+                    direction = Direction.DOWN;
+            
         }
     }
 }

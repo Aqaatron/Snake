@@ -34,23 +34,28 @@ namespace Snake
 
             rightLine.Draw();
 
-            Point start_pos = new Point(WIDTH - 10 , HEIGHT - 10, '*');
+            Point start_pos = new Point(4 , 5, '*');
 
             Snake snake = new Snake(start_pos, 3, Direction.RIGHT);
 
             snake.Draw();
+           
 
-            snake.Move();
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
 
-            Thread.Sleep(300);
+                    snake.HandleKey(key.Key);
 
-            snake.Move();
+                }
 
-            Thread.Sleep(300);
+                Thread.Sleep(200);
+                snake.Move();
 
-            snake.Move();
-
-            Console.Read();
+                
+            }
         }
         
     }
