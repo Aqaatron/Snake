@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Snake
 {
     class Program
     {
-        const int WIDTH = 100;
-        const int HEIGHT = 35;
+        const int WIDTH = 80;
+        const int HEIGHT = 25;
         const char SYM = '+';
         static void Main(string[] args)
         {
@@ -25,8 +26,6 @@ namespace Snake
 
             VerticalLine rightLine = new VerticalLine(1, HEIGHT + 1, WIDTH + 1, SYM);
 
-          
-
             topLine.Draw();
 
             botLine.Draw();
@@ -35,10 +34,22 @@ namespace Snake
 
             rightLine.Draw();
 
-            Point start_pos = new Point(WIDTH - 5 , HEIGHT - 5, '*');
+            Point start_pos = new Point(WIDTH - 10 , HEIGHT - 10, '*');
+
             Snake snake = new Snake(start_pos, 3, Direction.RIGHT);
 
             snake.Draw();
+
+            snake.Move();
+
+            Thread.Sleep(300);
+
+            snake.Move();
+
+            Thread.Sleep(300);
+
+            snake.Move();
+
             Console.Read();
         }
         
