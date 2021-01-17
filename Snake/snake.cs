@@ -28,12 +28,12 @@ namespace Snake
                 Point p = new Point(tail);
                 p.Move(i, direction);
                 pList.Add(p);
-                
+
             }
         }
 
         //Метод реализации движения нашей змейки.
-        internal void Move()
+        internal void Move(int width, int height)
         {
             Point tail = pList.First();//вытаскиваем последний элемент из List (последний элемент змейки)
 
@@ -41,15 +41,17 @@ namespace Snake
 
             Point head = GetNextPoint();//создаём новую точку для реализации движения змейки, путём перемешения первой точки
 
+            ChangeDir(head, width, height);
+
             pList.Add(head);//добавляем её в наш лист в самое начало
 
             tail.Clear();//стираем хвост из консоли
 
             head.Draw();//выводим новую точку змейки на консоль
-            
+
         }
         //Метод получения следующий точки нашей змейки для реализации её движения.
-        public Point GetNextPoint ()
+        public Point GetNextPoint()
         {
             Point head = pList.Last(); //Создаём переменную типа Point -  head, в которую копируем последнюю точку в списке (голову змейки).
 
@@ -58,6 +60,44 @@ namespace Snake
             nextpoint.Move(1, direction);//сдвигаем координату точки на 1 единицу в выбранном направлении
 
             return nextpoint;
+
+        }
+        public void ChangeDir(Point nextpoint, int width, int height)
+        {
+            if (nextpoint.y == 1)
+            {
+                direction = Direction.DOWN;
+            }
+            if (nextpoint.y == height - 1)
+            {
+                direction = Direction.UP;
+            }
+            if (nextpoint.x == 2)
+            {
+                direction = Direction.RIGHT;
+            }
+            if (nextpoint.x == width - 1)
+            {
+                direction = Direction.LEFT;
+            }
+        }
+           
+        internal bool Eat(Point food)
+        {
+            Point head = GetNextPoint();
+
+            if (head.IsHit(food))
+            {
+                food.sym = head.sym;
+
+                pList.Add(food);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
         }
 

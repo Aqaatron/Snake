@@ -12,6 +12,7 @@ namespace Snake
         const int WIDTH = 80;
         const int HEIGHT = 25;
         const char SYM = '+';
+        const char SYM_EAT = '#';
         static void Main(string[] args)
         {
             Console.SetWindowSize (WIDTH + 2, HEIGHT + 2);
@@ -39,10 +40,25 @@ namespace Snake
             Snake snake = new Snake(start_pos, 3, Direction.RIGHT);
 
             snake.Draw();
-           
+
+            foodCreator foodcreator = new foodCreator(WIDTH, HEIGHT, SYM_EAT);
+
+            Point food = foodcreator.CreatedFood();
+            food.Draw();
 
             while (true)
             {
+               if (snake.Eat(food))
+                {
+                    food = foodcreator.CreatedFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move(WIDTH, HEIGHT);
+                }
+                Thread.Sleep(100);
+
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
@@ -50,10 +66,6 @@ namespace Snake
                     snake.HandleKey(key.Key);
 
                 }
-
-                Thread.Sleep(200);
-                snake.Move();
-
                 
             }
         }
