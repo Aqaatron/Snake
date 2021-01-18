@@ -15,6 +15,35 @@ namespace Snake
         const char SYM_EAT = '#';
         static void Main(string[] args)
         {
+            VerticalLine v1 = new VerticalLine(0, 10, 10, SYM);
+
+            Draw(v1);
+
+            Point p = new Point(4, 5, SYM);
+
+            Figure fsnake = new Snake(p, 4, Direction.RIGHT);
+
+            Draw(fsnake);
+            fsnake.ToString();
+            
+            Snake snake1 = (Snake)fsnake;
+
+            snake1.Move(WIDTH, HEIGHT);
+
+            HorizontalLine h1 = new HorizontalLine(0, 10, 10, SYM);
+            List<Figure> figures = new List<Figure>();
+
+            figures.Add(v1);
+            figures.Add(fsnake);
+            figures.Add(snake1);
+            figures.Add(h1);
+
+            foreach (var f in figures)
+            {
+                f.Draw();
+            }
+
+            
             Console.SetWindowSize (WIDTH + 2, HEIGHT + 2);
 
             Console.SetBufferSize(WIDTH + 2, HEIGHT + 2);
@@ -68,6 +97,10 @@ namespace Snake
                 }
                 
             }
+        }
+        static void Draw(Figure figure)
+        {
+            figure.Draw();
         }
         
     }
