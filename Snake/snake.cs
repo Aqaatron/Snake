@@ -41,7 +41,7 @@ namespace Snake
 
             Point head = GetNextPoint();//создаём новую точку для реализации движения змейки, путём перемешения первой точки
 
-            ChangeDir(head, width, height);
+            //ChangeDir(head, width, height);
 
             pList.Add(head);//добавляем её в наш лист в самое начало
 
@@ -120,6 +120,19 @@ namespace Snake
 
                     direction = Direction.DOWN;
             
+        }
+        //Метод, реализующий проверку стокновения змейки сама с собой
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+
+            for (int i = 0; i < pList.Count -2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+                
+            }
+            return false;
         }
     }
 }

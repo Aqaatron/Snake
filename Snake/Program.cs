@@ -19,21 +19,13 @@ namespace Snake
 
             Console.SetBufferSize(WIDTH + 2, HEIGHT + 2);
 
-            HorizontalLine topLine = new HorizontalLine(1, WIDTH, 1, SYM);
+            Console.CursorVisible = false;
 
-            HorizontalLine botLine = new HorizontalLine(1, WIDTH, HEIGHT + 1, SYM);
+          
 
-            VerticalLine leftLine = new VerticalLine(1, HEIGHT + 1, 1, SYM);
+            Walls frame = new Walls(WIDTH, HEIGHT, SYM);
 
-            VerticalLine rightLine = new VerticalLine(1, HEIGHT + 1, WIDTH + 1, SYM);
-
-            topLine.Draw();
-
-            botLine.Draw();
-
-            leftLine.Draw();
-
-            rightLine.Draw();
+            frame.Draw();
 
             Point start_pos = new Point(4 , 5, '*');
 
@@ -48,6 +40,11 @@ namespace Snake
 
             while (true)
             {
+               if (snake.IsHitTail() || frame.IsHit(snake))
+                {
+                    break;
+                    
+                }
                if (snake.Eat(food))
                 {
                     food = foodcreator.CreatedFood();
@@ -57,7 +54,7 @@ namespace Snake
                 {
                     snake.Move(WIDTH, HEIGHT);
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(120);
 
                 if (Console.KeyAvailable)
                 {
@@ -68,7 +65,30 @@ namespace Snake
                 }
                 
             }
+            WriteGameOver();
+            Console.ReadLine();
+
         }
-        
+        static void WriteGameOver()
+        {
+            int xOffset = 25;
+            int yOffset = 8;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(xOffset, yOffset++);
+            WriteText("========================================", xOffset, yOffset++);
+            WriteText("П И С Ь,  Т Ы  Л У З Н У Л А", xOffset + 1, yOffset++);
+            yOffset++;
+            WriteText("Автор: Cидоров Андрей", xOffset + 1, yOffset++);
+            WriteText("GeekBrains", xOffset + 1, yOffset++);
+            WriteText("P. S.  Л Ю Б И М К А", xOffset + 1, yOffset++);
+            WriteText("========================================", xOffset, yOffset++);
+        }
+
+        static void WriteText(String text, int xOffset, int yOffset)
+        {
+            Console.SetCursorPosition(xOffset, yOffset);
+            Console.WriteLine(text);
+        }
+
     }
 }
